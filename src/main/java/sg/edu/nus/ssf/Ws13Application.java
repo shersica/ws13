@@ -1,4 +1,4 @@
-package sg.edu.nus.ssf.ws13.ws13;
+package sg.edu.nus.ssf;
 
 import java.io.File;
 import java.io.FileReader;

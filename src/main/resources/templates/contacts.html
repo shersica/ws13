@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Contacts</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Contacts</h1>
+            <hr>
+
+            <div th:if="${contacts.isEmpty()}">
+                <h2>No contacts saved.</h2>
+            </div>
+
+            <div class="list-group">
+                <ul th:each="entry: ${contacts}">
+                    <a th:href="@{/contact/{id}(id=${entry.key})}" class="list-group-item list-group-item-action">
+                        <span data-th-text="${entry.value}"></span>
+                    </a>
+                </ul>
+            </div>
+        </div>
+        <a th:href="@{/add}" class="btn btn-primary">Add New Contact</a>
+    </body>
+</html>
