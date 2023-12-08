@@ -16,7 +16,7 @@
 
             <div class="list-group">
                 <ul th:each="entry: ${contacts}">
-                    <a th:href="@{/contact/{id}(id=${entry.key})}" class="list-group-item list-group-item-action">
+                    <a th:href="@{/contact/{id}(id=${entry.key})}" class="list-group-item list-group-item-action"> 
                         <span data-th-text="${entry.value}"></span>
                     </a>
                 </ul>

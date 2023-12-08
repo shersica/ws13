@@ -1,18 +1,18 @@
 package sg.edu.nus.ssf.controller;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,13 +52,24 @@ public class ContactController {
         UUID uuid = UUID.randomUUID();
         String id = uuid.toString().split("-")[0];  //or String id = uuid.toString().substring(0,8);
         contact.setId(id);
-        
+
+        //Check if age >= 10 and <= 100
+        Integer age = LocalDate.now().getYear() - contact.getDateOfBirth().getYear();
+        // System.out.println(age);
+        if(age < 10 || age > 100){
+            FieldError err = new FieldError("contact", "dateOfBirth", "Cannot be younger than 10 or older than 100");
+            binding.addError(err);
+            // model.addAttribute("ageError","Age must be more than 10 or less than 100");
+            mav.setViewName("index");
+            mav.setStatus(HttpStatus.BAD_REQUEST);
+            return mav;
+        } 
+
         contactRepo.save(contact);
         model.addAttribute("savedContact", contact);
         mav.setStatus(HttpStatusCode.valueOf(201));
         mav.setViewName("success");
         return mav;
-  
     }
 
     @GetMapping("/contact/{id}")

@@ -16,19 +16,19 @@
         <form method="POST" th:action="@{/contact}" th:object="${contact}">                     
             <div class="mb-3">
                 <label class="form-label">Name</label>
-                <input type="text" class="form-control" name="name" th:field="*{name}" required/>  
+                <input type="text" class="form-control" name="name" th:field="*{name}" />  
             </div>  
             <div class="alert alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
 
             <div class="mb-3">
                 <label class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" th:field="*{email}" required/>  
+                <input type="email" class="form-control" name="email" th:field="*{email}" />  
             </div>  
             <div class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 
             <div class="mb-3">
                 <label for="phoneno" class="form-label">Phone No</label>
-                <input type="text" class="form-control" name="phoneNo" th:field="*{phoneNo}" required/>  
+                <input type="text" class="form-control" name="phoneNo" th:field="*{phoneNo}" />  
             </div>  
             <div class="alert alert-danger" th:if="${#fields.hasErrors('phoneNo')}" th:errors="*{phoneNo}"></div>
 
@@ -37,7 +37,9 @@
                 <input type="date" class="form-control" name="dateOfBirth" th:field="*{dateOfBirth}" />  
             </div>  
             <div class="alert alert-danger" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></div>
-
+            <!-- <div class="alert alert-danger" th:if="${ageError}">
+                <p th:text="${ageError}"></p>
+            </div> -->
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>    
